@@ -9,7 +9,8 @@ export const MainScreen = ({ navigation }) => {
     const openPostHandler = post => {
         navigation.navigate('Post', {
             postId: post.id,
-            date: post.date
+            date: post.date,
+            booked: post.booked
         })
     }
     return (
@@ -25,9 +26,16 @@ export const MainScreen = ({ navigation }) => {
 
 MainScreen.navigationOptions = {
     headerTitle: 'Мой блог',
-    headerRight: <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
-        <Item title='Take photo' iconName='ios-camera' onPress={ () => console.log('Press photo')}></Item>
-    </HeaderButtons>
+    headerRight: ( 
+        <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
+            <Item title='Take photo' iconName='ios-camera' onPress={ () => console.log('Press photo')}></Item>
+        </HeaderButtons>
+    ),
+    headerLeft: (
+        <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
+            <Item title='menu' iconName='md-menu' onPress={ () => console.log('Press menu')}></Item>
+        </HeaderButtons>
+    )
 }
 
 const styles = StyleSheet.create({

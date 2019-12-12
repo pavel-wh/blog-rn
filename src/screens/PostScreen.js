@@ -1,5 +1,15 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, Button, ScrollView, Alert } from 'react-native'
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Image, 
+    Button, 
+    ScrollView, 
+    Alert 
+} from 'react-native'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { AppHeaderIcon } from '../components/AppHeaderIcon'
 import { THEME } from '../theme'
 import { DATA } from '../data'
 
@@ -42,13 +52,24 @@ export const PostScreen = ({ navigation }) => {
 
 PostScreen.navigationOptions = ({ navigation }) => {
     const date = navigation.getParam('date')
+    const booked = navigation.getParam('booked')
+    const iconName = booked ? 'ios-star' : 'ios-star-outline'
     return {
         headerTitle: `Пост от ${ new Date(date).toLocaleDateString() }`,
         headerStyle: {
             backgroundColor: 'firebrick',
             backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white'
         },
-        headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR
+        headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR,
+        headerRight: ( 
+            <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
+                <Item 
+                    title='Take photo' 
+                    iconName={ iconName } 
+                    onPress={ () => console.log('Press favorites')}
+                ></Item>
+            </HeaderButtons>
+        ),
     }
 }
 
