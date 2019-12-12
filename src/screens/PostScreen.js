@@ -2,21 +2,25 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { THEME } from '../theme'
 
-export const PostScreen = ({}) => {
+export const PostScreen = ({ navigation }) => {
+    const postId = navigation.getParam('postId')
     return (
         <View style={ styles.center }>
-            <Text>PostScreen</Text>
+            <Text>PostScreen { postId }</Text>
         </View>
     )
 }
 
-PostScreen.navigationOptions = {
-    headerTitle: 'Пост номер 42',
-    headerStyle: {
-        backgroundColor: 'firebrick',
-        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white'
-    },
-    headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR
+PostScreen.navigationOptions = ({ navigation }) => {
+    const date = navigation.getParam('date')
+    return {
+        headerTitle: `Пост от ${ new Date(date).toLocaleDateString() }`,
+        headerStyle: {
+            backgroundColor: 'firebrick',
+            backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white'
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR
+    }
 }
 
 const styles = StyleSheet.create({
