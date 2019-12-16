@@ -16,11 +16,11 @@ export const BookmarkedScreen = ({ navigation }) => {
     return  <PostList data={ bookmarkedData } onOpen={ openPostHandler } />
 }
 
-BookmarkedScreen.navigationOptions = {
+BookmarkedScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Избранное',
     headerLeft: (
         <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
-            <Item title='menu' iconName='md-menu' onPress={ () => console.log('Press menu')}></Item>
+            <Item title='menu' iconName='md-menu' onPress={ () => navigation.toggleDrawer() }></Item>
         </HeaderButtons>
     )
-}
+})

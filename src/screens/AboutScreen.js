@@ -6,7 +6,8 @@ import { View, Text, StyleSheet } from 'react-native'
 export const AboutScreen = ({ navigation }) => {
     return (
         <View style={ styles.center }>
-            <Text>AboutScreen</Text>
+            <Text>Это приложение для личных заметок.</Text>
+            <Text>Версия 0.0.1</Text>
         </View>
     )
 }
