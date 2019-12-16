@@ -13,9 +13,9 @@ export const BookmarkedScreen = ({ navigation }) => {
         })
     }
 
-    const bookmarkedData = useSelector(state => state.post.bookmarkedPosts)
+    const bookmarkedPosts = useSelector(state => state.post.bookmarkedPosts)
 
-    return  <PostList data={ bookmarkedData } onOpen={ openPostHandler } />
+    return  <PostList data={ bookmarkedPosts } onOpen={ openPostHandler } />
 }
 
 BookmarkedScreen.navigationOptions = ({ navigation }) => ({
