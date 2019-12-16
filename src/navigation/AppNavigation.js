@@ -10,22 +10,21 @@ import { PostScreen } from '../screens/PostScreen'
 import { BookmarkedScreen } from '../screens/BookmarkedScreen'
 import { THEME } from '../theme'
 
+const navigatorOptions = {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white'
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR
+    }
+}
+
 const PostNavigation = createStackNavigator(
     {
         Main: MainScreen,
-        Post: {
-            screen: PostScreen
-        }
+        Post: PostScreen
     },
-    {
-        InitialRouteName: 'Main',
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white'
-            },
-            headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR
-        }
-    }
+    navigatorOptions
 )
 
 const BookedNavigator = createStackNavigator(
@@ -33,14 +32,7 @@ const BookedNavigator = createStackNavigator(
         Booked: BookmarkedScreen,
         Post: PostScreen
     },
-    {
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white'
-            },
-            headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR
-        }
-    }
+    navigatorOptions
 )
 
 const bottomTabsConfig = {
