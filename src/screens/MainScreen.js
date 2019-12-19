@@ -29,12 +29,20 @@ MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Мой блог',
     headerRight: ( 
         <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
-            <Item title='Take photo' iconName='ios-camera' onPress={ () => console.log('Press photo')}></Item>
+            <Item 
+                title='Take photo' 
+                iconName='ios-camera' 
+                onPress={ () => navigation.push('Create') }
+            ></Item>
         </HeaderButtons>
     ),
     headerLeft: (
         <HeaderButtons HeaderButtonComponent={ AppHeaderIcon }>
-            <Item title='menu' iconName='md-menu' onPress={ () => navigation.toggleDrawer() }></Item>
+            <Item 
+                title='menu' 
+                iconName='md-menu' 
+                onPress={ () => navigation.toggleDrawer() }
+            ></Item>
         </HeaderButtons>
     )
 })

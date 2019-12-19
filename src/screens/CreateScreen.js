@@ -1,27 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcon } from '../components/AppHeaderIcon'
-import { View, Text, StyleSheet, Image, TextInput, Button, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Image, 
+    TextInput, 
+    Button, 
+    ScrollView, 
+    TouchableWithoutFeedback,
+    Keyboard 
+} from 'react-native'
 import { THEME } from '../theme'
 import { useDispatch } from 'react-redux'
 import { addPost } from '../store/actions/post'
+import { PhotoPicker } from '../components/PhotoPicker'
 
 export const CreateScreen = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const [text, setText] = useState('')
     
+    const imgRef = useRef()
+
     const img = 'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg'
 
     const createPostHandler = () => {
         const post = {
             date: new Date().toJSON(),
             text: text,
-            img: img,
+            img: imgRef.current,
             booked: false
         }
         dispatch(addPost(post))
         navigation.navigate('Main')
+    }
+
+    const photoPickHandler = uri => {
+        imgRef.current = uri
     }
 
     return (
@@ -38,16 +55,12 @@ export const CreateScreen = ({ navigation }) => {
                         onChangeText={ setText }
                         multiline
                     />
-                    <Image 
-                        source={{ 
-                            uri: img
-                        }}
-                        style={ styles.image }
-                    />
+                    <PhotoPicker onPick={ photoPickHandler } style={ styles.image } />
                     <Button 
                         title='Создать пост'
                         color={ THEME.MAIN_COLOR }
-                        onPress={ createPostHandler }
+                        onPress={ createPostHandler } 
+                        disabled={ !text }
                     />
                 </View>
             </TouchableWithoutFeedback>
@@ -74,11 +87,11 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-regular'
     },
     textarea: {
-
+        marginVertical: 10
     },
     image: {
         width: '100%',
-        height: 200,
+        height: 200, 
         marginVertical: 10
     },
 })
