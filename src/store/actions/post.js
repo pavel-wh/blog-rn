@@ -12,18 +12,20 @@ export const loadPosts = () => {
     }
 }
 
-export const toggleBookmarked = id => {
-    return {
+export const toggleBookmarked = post => async dispatch => {
+    await DB.updatePost(post)
+    dispatch({
         type: TOGGLE_BOOKMARKED,
-        payload: id
-    }
+        payload: post.id
+    })
 }
 
-export const removePost = id => {
-    return {
+export const removePost = id => async dispatch => {
+    await DB.removePost(id)
+    dispatch({
         type: REMOVE_POST,
         payload: id
-    }
+    })
 }
 
 export const addPost = post => async dispatch => {
@@ -44,7 +46,7 @@ export const addPost = post => async dispatch => {
         img: newPath
     }
     const id = await DB.createPost(payload)
-    
+
     payload.id = id
 
     dispatch({
