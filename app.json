@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "App Blog React Native",
+    "name": "BlogRN",
     "slug": "blog-rn",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -11,11 +11,11 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/rn-icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/rn-splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#242832"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +24,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pavelbelyaev.blog-rn",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.pavelbelyaev.blog_rn",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "description": ""
   }
