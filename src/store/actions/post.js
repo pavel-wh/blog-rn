@@ -1,3 +1,4 @@
+import * as FileSystem from 'expo-file-system'
 import { LOAD_POSTS, TOGGLE_BOOKMARKED, REMOVE_POST, ADD_POST } from '../types'
 import { DB } from '../../db'
 
@@ -6,7 +7,7 @@ export const loadPosts = () => {
         const posts = await DB.getPosts()
         dispatch({
             type: LOAD_POSTS,
-            payload: []        
+            payload: posts        
         })
     }
 }
@@ -25,11 +26,29 @@ export const removePost = id => {
     }
 }
 
-export const addPost = post => {
-    post.id = Date.now().toString()
+export const addPost = post => async dispatch => {
+    const fileName = post.img.split('/').pop()
+    const newPath = FileSystem.documentDirectory + fileName
 
-    return {
-        type: ADD_POST,
-        payload: post
+    try {
+        await FileSystem.moveAsync({
+            from: post.img,
+            to: newPath
+        })
+    } catch (error) {
+        console.log('Error: ', error)
     }
+
+    const payload = {
+        ...post,
+        img: newPath
+    }
+    const id = await DB.createPost(payload)
+    
+    payload.id = id
+
+    dispatch({
+        type: ADD_POST,
+        payload
+    })
 }

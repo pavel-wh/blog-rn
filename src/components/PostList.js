@@ -2,8 +2,8 @@ import React from 'react'
 import { View, StyleSheet, FlatList, Text } from 'react-native'
 import { Post } from './Post'
 
-export const PostList = ({ data, onOpen }) => {
-    if(!data.lenght) {
+export const PostList = ({ data=[], onOpen }) => {
+    if(!data.length) {
         return (
             <View style={ styles.wrapper }>
                 <Text style={ styles.noItems }>Тут пока нету постов...</Text>

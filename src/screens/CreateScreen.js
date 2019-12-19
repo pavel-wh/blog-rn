@@ -24,8 +24,6 @@ export const CreateScreen = ({ navigation }) => {
     
     const imgRef = useRef()
 
-    const img = 'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg'
-
     const createPostHandler = () => {
         const post = {
             date: new Date().toJSON(),
